@@ -16,4 +16,7 @@ It is compulsory that you tag @CodeMasters and use the hashtag
 The internship program is unpaid, and no monetary compensation will be provided. The program offers Certificates & LoR upon successful completion of assigned tasks.
 
 It is important to be punctual and meet all deadlines provided for the tasks and projects.
+<<<<<<< HEAD
 
+=======
+>>>>>>> f46635d (adding new lines about CodeMasters)
