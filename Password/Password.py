@@ -50,14 +50,15 @@ def generate_pw_butn():
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
+def exit_app():
+    root.quit()
+
 def setup_gui():
     root = tk.Tk()
     root.title("Password Generator")
 
     window_width = 400
     window_height = 200
-
-    # Calculate the window's position to center it on the screen
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
     x = (screen_width - window_width) // 2
@@ -88,14 +89,15 @@ def setup_gui():
     generate_butn = tk.Button(root, text="Generate Password", command=generate_pw_butn,fg ="red", font=("Arial", 15, "bold"))
     generate_butn.grid(row=4, column=0, columnspan=2, sticky="w")
 
-    # password_label = tk.Label(root, text="Generated Password:", font=("Arial", 15, "bold"))
-    # password_label.grid(row=5, column=0, columnspan=2, sticky="w")
-
     password_entry = tk.Entry(root, show="")
     password_entry.grid(row=4, column=1, columnspan=2, sticky="w")
 
     show_butn = tk.Button(root, text='Show Password', command=password_visible, state="disabled",fg="purple", font=("Arial", 15, "bold"))
     show_butn.grid(row=7, column=0, columnspan=2)
+
+
+    exit_button = tk.Button(root, text="Exit", command=exit_app, fg="red", font=("Arial", 15, "bold"))
+    exit_button.grid(row=8, column=0, columnspan=2)
 
     return root, length_entry, alpha_var, numeric_var, special_var, password_entry, show_butn
 
