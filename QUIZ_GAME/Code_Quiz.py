@@ -142,9 +142,8 @@ class QuizGame:
   
     def start_quiz(self):
         self.shuffle_questions()
-
         self.root = tk.Tk()
-        self.root.title("CodeMasters Quiz Game")
+        self.root.title("Welcome to CodeMasters Quiz Game")
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         window_width = 600  
