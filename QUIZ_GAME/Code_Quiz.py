@@ -40,6 +40,16 @@ class QuizGame:
     def shuffle_questions(self):
         random.shuffle(self.questions)
 
+    def reset_quiz(self):
+        self.score = 0
+        self.current_question_index = 0
+        self.shuffle_questions()
+        self.clear_widgets()
+        self.ask_question()
+
+    def end_quiz(self):
+        self.root.destroy()
+
     def ask_question(self):
         if self.current_question_index < len(self.questions):
             question_data = self.questions[self.current_question_index]
@@ -63,6 +73,10 @@ class QuizGame:
         self.current_question_index += 1
         self.clear_widgets()  
         self.ask_question()
+        self.reset_button = tk.Button(self.root, text="Reset Quiz", fg="darkblue", font=("Arial", 16, "bold"), command=self.reset_quiz)
+        self.reset_button.pack()
+        self.end_button = tk.Button(self.root, text="End Quiz", fg="darkred", font=("Arial", 16, "bold"), command=self.end_quiz)
+        self.end_button.pack()
 
     def display_results(self):
         result_message = f"Your score is {self.score}/{len(self.questions)}"
@@ -97,7 +111,6 @@ class QuizGame:
         self.submit_button = tk.Button(self.root, text="Submit", fg="darkblue",font=("Arial",16,"bold"),command=self.check_answer)
         self.submit_button.pack()
 
-        # Create the user answer entry here
         self.user_answer_entry = tk.Entry(self.root, width=20,fg="purple",font=("Helvetica", 20,"bold"))
         self.user_answer_entry.pack()
 
@@ -157,11 +170,24 @@ class CustomMessageBox(tk.Toplevel):
     def __init__(self, parent, title, message):
         super().__init__(parent)
         self.title(title)
-        self.geometry("400x200")
+        
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        
+        window_width = 400
+        window_height = 200
+        
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 2
+        
+        self.geometry(f"{window_width}x{window_height}+{x}+{y}")
+
         title_label = tk.Label(self, text=title, padx=50, pady=10, fg="darkred", font=("Helvetica", 20, "bold"))
         title_label.pack()
-        tk.Label(self, text=message, padx=50, pady=60,fg="darkgreen",font=("Helvetica", 16,"bold")).pack()
-        ok_button = tk.Button(self, text="OK", command=self.destroy,fg="darkblue",font=("Helvetica", 16, "bold"))
+        
+        tk.Label(self, text=message, padx=50, pady=60, fg="darkgreen", font=("Helvetica", 16, "bold")).pack()
+        
+        ok_button = tk.Button(self, text="OK", command=self.destroy, fg="darkblue", font=("Helvetica", 16, "bold"))
         ok_button.pack()
 
 if __name__ == "__main__":
