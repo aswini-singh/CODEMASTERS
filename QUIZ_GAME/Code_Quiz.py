@@ -72,7 +72,7 @@ class QuizGame:
             result_message += "\nGood job! You did well."
         else:
             result_message += "\nKeep practicing. You can do better next time."
-        CustomMessageBox(self.root, "Quiz completed!", result_message)
+        CustomMessageBox(self.root, "Quiz completed!",result_message)
 
     def clear_widgets(self):
         for widget in self.root.winfo_children():
@@ -82,50 +82,40 @@ class QuizGame:
         question_text = question_data["question"]
         options = question_data["options"]
 
-        self.clear_widgets()  # Clear previous widgets
+        self.clear_widgets() 
 
-        custom_font_question = ("Helvetica", 18)  # Adjust the size as needed
-
-        self.question_label = tk.Label(self.root, text=question_text, wraplength=400, padx=20, pady=10, font=custom_font_question)
+        self.question_label = tk.Label(self.root, text=question_text, wraplength=400, padx=20, pady=10, font= ("Helvetica", 18,"bold") ,fg="red")
         self.question_label.pack()
 
-        self.user_answer_entry = None  # Clear previous entry widget
+        self.user_answer_entry = None 
         self.current_correct_answer = question_data["correct_answer"]
 
         for i, option in enumerate(options, start=1):
             tk.Radiobutton(self.root, text=f"{i}. {option}", variable=self.selected_option, value=option).pack()
-        custom_font_submit_button = ("Helvetica", 16)
+        custom_font_submit_button = ("Helvetica", 16,"bold")
 
-        # Add a "Submit" button for multiple-choice questions
-        self.submit_button = tk.Button(self.root, text="Submit", command=self.check_answer)
+        self.submit_button = tk.Button(self.root, text="Submit", fg="darkblue",font=("Arial",16,"bold"),command=self.check_answer)
         self.submit_button.pack()
 
         # Create the user answer entry here
-        self.user_answer_entry = tk.Entry(self.root, width=20)
+        self.user_answer_entry = tk.Entry(self.root, width=20,fg="purple",font=("Helvetica", 20,"bold"))
         self.user_answer_entry.pack()
 
     def ask_fill_in_the_blank_question(self, question_data):
         question_text = question_data["question"]
 
-        self.clear_widgets()  # Clear previous widgets
+        self.clear_widgets() 
 
-        # Set a custom font for the question label with increased size
-        custom_font_question = ("Helvetica", 18)  # Adjust the size as needed
-
-        self.question_label = tk.Label(self.root, text=question_text, wraplength=400, padx=20, pady=10, font=custom_font_question)
+        self.question_label = tk.Label(self.root, text=question_text, wraplength=400, padx=20, pady=10, font=("Helvetica", 18,"bold"),fg="red")
         self.question_label.pack()
 
-        self.user_answer_entry = None  # Clear previous entry widget
+        self.user_answer_entry = None  
         self.current_correct_answer = question_data["correct_answer"]
 
-        # Add a text entry for fill-in-the-blank questions
-        self.user_answer_entry = tk.Entry(self.root, width=20)
+        self.user_answer_entry = tk.Entry(self.root, width=20,fg="purple",font=("Helvetica", 20,"bold"))
         self.user_answer_entry.pack()
 
-        custom_font_submit_button = ("Helvetica", 16)
-
-        # Add a "Submit" button for fill-in-the-blank questions
-        self.submit_button = tk.Button(self.root, text="Submit", command=self.check_answer)
+        self.submit_button = tk.Button(self.root, text="Submit",fg="darkblue",font=("Arial",16,"bold"), command=self.check_answer)
         self.submit_button.pack()
 
     def next_question(self):
@@ -142,7 +132,6 @@ class QuizGame:
 
         self.root = tk.Tk()
         self.root.title("CodeMasters Quiz Game")
-
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         window_width = 600  
@@ -152,8 +141,6 @@ class QuizGame:
 
         self.root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
-        custom_font = ("Helvetica", 20) 
-
         self.user_answer_entry = None 
 
         self.selected_option = tk.StringVar()
@@ -162,7 +149,7 @@ class QuizGame:
 
         for widget in self.root.winfo_children():
             if isinstance(widget, (tk.Label, tk.Button, tk.Entry)):
-                widget.config(font=custom_font)
+                widget.config(font=("Helvetica", 20,"bold"))
 
         self.root.mainloop()
 
@@ -171,8 +158,10 @@ class CustomMessageBox(tk.Toplevel):
         super().__init__(parent)
         self.title(title)
         self.geometry("400x200")
-        tk.Label(self, text=message, padx=50, pady=60).pack()
-        ok_button = tk.Button(self, text="OK", command=self.destroy)
+        title_label = tk.Label(self, text=title, padx=50, pady=10, fg="darkred", font=("Helvetica", 20, "bold"))
+        title_label.pack()
+        tk.Label(self, text=message, padx=50, pady=60,fg="darkgreen",font=("Helvetica", 16,"bold")).pack()
+        ok_button = tk.Button(self, text="OK", command=self.destroy,fg="darkblue",font=("Helvetica", 16, "bold"))
         ok_button.pack()
 
 if __name__ == "__main__":
