@@ -7,7 +7,7 @@ def get_weather():
     
     try:
         json_data = requests.get(api).json()
-        
+
         if 'weather' in json_data:
             condition = json_data['weather'][0]['main']
             temp_celsius = int(json_data['main']['temp'] - 273.15)
@@ -50,8 +50,14 @@ def clear_weather():
     label2.config(text="")
 
 canvas = tk.Tk()
-canvas.geometry("600x500")
 canvas.title("Weather App")
+
+screen_width = canvas.winfo_screenwidth()
+screen_height = canvas.winfo_screenheight()
+
+x = (screen_width / 2) - (600 / 2) 
+y = (screen_height / 2) - (500 / 2)
+canvas.geometry(f"600x500+{int(x)}+{int(y)}")
 
 textField = tk.Entry(canvas, justify="center", width=20, font=("Arial", 35, "bold"))
 textField.pack(pady=20)
